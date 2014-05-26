@@ -2,4 +2,5 @@ __author__ = 'issue'
 
 
 class Path(object):
-    pass
+    def __init__(self, path):
+        self.path = path
