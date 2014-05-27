@@ -13,7 +13,7 @@ def scale(field):
     scaled_path = [(a * SCALE_FACTOR, b * SCALE_FACTOR) for (a, b) in field.path]
     scaled_size = tuple([a * SCALE_FACTOR for a in field.size])
     scaled_entry_point = tuple([a * SCALE_FACTOR for a in field.entry_point])
-    scaled_base = tuple([a * SCALE_FACTOR for a in field.base])
+    scaled_base = tuple([a * SCALE_FACTOR for a in field.base.position])
 
     return Field(scaled_path, scaled_size, scaled_entry_point, scaled_base)
 
@@ -36,7 +36,7 @@ class FieldDrawer(object):
         #print(self._create_rectangle())
         self.renderer.draw_rect(_create_rectangle(self.scaled_field.base))
         self.renderer.draw_rect(_create_rectangle(self.scaled_field.entry_point))
-        #self.renderer.draw_line(self._calculate_path()) # fixed in git version of pysdl2
+        self.renderer.draw_line(self._calculate_path()) # fixed in git version of pysdl2
         self.renderer.present()
 
 
