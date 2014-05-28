@@ -1,13 +1,17 @@
+import os
 import sys
 
 import libs.sdl2 as sdl2
 import libs.sdl2.ext
+from libs.sdl2 import sdlimage
+
 
 from field_drawer import FieldDrawer
 from field import Field
 from base_entity import BaseEntity
 __author__ = 'issue'
 
+WINDOW_SIZE = (600, 600)
 path = [(0, 0), (2, 3), (3, 7), (10, 10)]  # left upper to lower right
 size = (10, 10)
 base_point = (6, 6)
@@ -18,14 +22,16 @@ test_field = Field(path, size, entry_point=(2, 2), base=base)
 
 def run():
     libs.sdl2.ext.init()
-    window = libs.sdl2.ext.Window("ToDO", size=(640, 600))
+    window = libs.sdl2.ext.Window("ToDO", WINDOW_SIZE)
     window.show()
+
     renderer = libs.sdl2.ext.Renderer(window)
-    fd = FieldDrawer(test_field, renderer)
-    fd.draw()
+    fd = FieldDrawer(test_field, renderer, WINDOW_SIZE)
 
     running = True
     while running:
+        renderer.clear()
+        fd.draw()
         events = libs.sdl2.ext.get_events()
         for event in events:
             if event.type == sdl2.SDL_QUIT:
