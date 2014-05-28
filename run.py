@@ -5,19 +5,19 @@ import libs.sdl2 as sdl2
 import libs.sdl2.ext
 from libs.sdl2 import sdlimage
 
-
 from field_drawer import FieldDrawer
 from field import Field
 from base_entity import BaseEntity
+
 __author__ = 'issue'
 
 WINDOW_SIZE = (600, 600)
-path = [(0, 0), (2, 3), (3, 7), (10, 10)]  # left upper to lower right
+path = [(0, 0), (1, 2), (2, 1), (3, 7), (10, 10)]  # left upper to lower right
 size = (10, 10)
-base_point = (6, 6)
+base_point = (3, 7)
 base = BaseEntity(100, 0, "BASE", "Your base", base_point, 2, 3, 5, (2, 2))
 
-test_field = Field(path, size, entry_point=(2, 2), base=base)
+test_field = Field(path, size, entry_point=(0, 0), base=base)
 
 
 def run():
