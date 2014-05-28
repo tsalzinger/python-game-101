@@ -1,5 +1,4 @@
 import os
-from base_entity import BaseEntity
 from field import Field
 import libs.sdl2.ext as sdl2ext
 import sdl2
@@ -43,6 +42,7 @@ class FieldDrawer(object):
         self.tower_sp = self.sp_factory.from_image(resources.get_path("tower.png"))
         self.back_ground_sp = self.sp_factory.from_image(resources.get_path("grass.png"))
         self.entry_sp = self.sp_factory.from_image(resources.get_path("red.png"))
+        self.ground_sp = self.sp_factory.from_image(resources.get_path("floor.png"))
         self.grass_rect = (0, 0, 600, 600)
         self.tower_rect = (200, 300, 32, 32)
         self.entry_rect = (self.scaled_field.entry_point[0], self.scaled_field.entry_point[1], 32, 32)
@@ -57,8 +57,26 @@ class FieldDrawer(object):
         SDL2 renderer.draw_line wants a tuple and start and end points
         components of the game field are blitted onto the renderer
         """
+        size_x = 30
+        size_y = 15
+        tile_width = 128
+        tile_height = 64
+        for x in range(0, 10):
+            if x % 2 == 0:
+                offset_x = tile_width / 2
+            else:
+                offset_x = 0
 
-        self.renderer.copy(self.back_ground_sp, dstrect=self.grass_rect)
+            for y in range(0, 10):
+                nx = int((y * tile_width) + offset_x)
+                #nx = int((y * tile_width / 2) + (x * tile_width / 2))
+                #ny = int((x * tile_height / 2) - (y * tile_height /2)) + 200
+                ny = int(x * tile_height / 2)
+                #print(nx, ny)
+                dstrect = (nx, ny, 256, 128)
+                self.renderer.copy(self.ground_sp, dstrect=dstrect)
+
+        #self.renderer.copy(self.back_ground_sp, dstrect=self.grass_rect)
         self.renderer.copy(self.tower_sp, dstrect=self.tower_rect)
         self.renderer.copy(self.base_sp, dstrect=self.base_rect)
         self.renderer.copy(self.entry_sp, dstrect=self.entry_rect)

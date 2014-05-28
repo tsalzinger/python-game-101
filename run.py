@@ -8,10 +8,11 @@ from libs.sdl2 import sdlimage
 from field_drawer import FieldDrawer
 from field import Field
 from base_entity import BaseEntity
+from libs.sdl2.video import SDL_WINDOW_RESIZABLE
 
 __author__ = 'issue'
 
-WINDOW_SIZE = (600, 600)
+WINDOW_SIZE = (1500, 520)
 path = [(0, 0), (1, 2), (2, 1), (3, 7), (10, 10)]  # left upper to lower right
 size = (10, 10)
 base_point = (3, 7)
@@ -22,7 +23,7 @@ test_field = Field(path, size, entry_point=(0, 0), base=base)
 
 def run():
     libs.sdl2.ext.init()
-    window = libs.sdl2.ext.Window("ToDO", WINDOW_SIZE)
+    window = libs.sdl2.ext.Window("ToDO", WINDOW_SIZE, flags=SDL_WINDOW_RESIZABLE)
     window.show()
 
     renderer = libs.sdl2.ext.Renderer(window)
